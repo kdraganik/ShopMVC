@@ -1,0 +1,109 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.wraper{
+    width: 100%;
+    height: 100%;
+}
+.wraper .breadcrumb{
+    background:none;
+}
+.product-list .products-container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.product-list .product {
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 30%;
+}
+.product-list .product .image {
+    margin: 5px;
+    height: 200px;
+    width: 200px;
+}
+.product-list .button{
+    margin-left: 30px
+}
+.product-list .body{
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: flex-start;
+}
+.product-list .body > *{
+    margin: 4px;
+    margin-top: 0;
+}
+.product-list form{
+    padding: 5px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.wraper .error{
+    color: red;
+}
+.home-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+}
+.product-details {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+.product-details .image{
+    width: 400px;
+}
+.product-details .info{
+    position: relative;
+    margin-left: 25px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+.product-details form {
+    position:absolute;
+    bottom: 0px;
+}
+.shopping-cart .table td, .shopping-cart .table th{
+    vertical-align: middle;
+    text-align: center;
+}

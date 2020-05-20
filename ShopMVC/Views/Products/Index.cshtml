@@ -1,0 +1,68 @@
+﻿@model ShopMVC.ViewModels.ProductsViewModel
+@{
+    ViewBag.Title = "Product list";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Produkty w ofercie</h2>
+<div class="wraper product-list">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Strona główna</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Produkty</li>
+        </ol>
+    </nav>
+    @using (Html.BeginForm("Index", "Products"))
+    {
+        <div>
+            <label for="query">Wyszukaj:</label>
+            <input type="text" name="query" />
+        </div>        
+        <div>
+            <label for="sort">Sortuj według:</label>
+            <select id="sort" name="sort">
+                <option value="name">Nazwa</option>
+                <option value="price">Cena</option>
+            </select>
+        </div>
+        <div>
+            <label for="size">Na stronie:</label>
+            <select id="size" name="pageSize">
+                <option value="3">3</option>
+                <option value="6">6</option>
+                <option value="9">9</option>
+                <option value="12">12</option>
+            </select>
+        </div>
+            
+        <input type="submit" class="btn btn-default" value="Zatwierdź" />
+    }
+    <div class="products-container">
+        @foreach (var product in Model.ListOfProducts)
+        {
+            <div class="product">
+                <img class="image" src="@product.Photo" alt="Zdjęcie @product.Name" />
+                <div class="body">
+                    <h3 class="title">@Html.ActionLink(product.Name, "Details", "Products", new { id = product.Id }, null)</h3>
+                    <h5 class="price">Cena: @product.Price.ToString("0.00") zł</h5>
+                </div>
+            </div>
+        }
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (Model.Page != 1)
+            {
+                <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Products", new { query = Model.Query, sort = Model.Sort, page = Model.Page - 1, pageSize = Model.PageSize  })">Poprzednia</a></li>
+            }
+            @for (int i = 1; i <= Model.Max; ++i)
+            {
+                <li class="page-item"><a class="page-link" href="@(i == Model.Page ? "#" : Url.Action("Index", "Products", new { query = Model.Query, sort = Model.Sort, page = i, pageSize = Model.PageSize  }))">@i</a></li>
+            }
+            @if (Model.Page != Model.Max)
+            {
+                <li class="page-item"><a class="page-link" href="@Url.Action("Index", "Products", new { query = Model.Query, sort = Model.Sort, page = Model.Page + 1, pageSize = Model.PageSize  })">Następna</a></li>
+            }
+        </ul>
+    </nav>
+</div>

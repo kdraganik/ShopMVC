@@ -1,0 +1,58 @@
+﻿@model ShopMVC.ViewModels.ProductFormModel
+@{
+    ViewBag.Title = "ProductForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Header</h2>
+<div class="wraper">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Strona główna</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Products")">Produkty</a></li>
+            @if (@Model.Header == "Dodaj nowy produkt")
+            {
+                <li class="breadcrumb-item active" aria-current="page">Dodaj produkt</li>
+            }
+            @if (Model.Header == "Edytuj produkt")
+            {
+                <li class="breadcrumb-item"><a href="@Url.Action("Details", "Products", new { id = Model.Product.Id })">@Model.Product.Name</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edytuj</li>
+            }
+        </ol>
+    </nav>
+    @using (Html.BeginForm("Save", "Products"))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Product.Name)
+            @Html.TextBoxFor(m => m.Product.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Product.Name)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Product.Price)
+            @Html.TextBoxFor(m => m.Product.Price, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Product.Price)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Product.Description)
+            @Html.TextBoxFor(m => m.Product.Description, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Product.Description)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Product.NumberInStock)
+            @Html.TextBoxFor(m => m.Product.NumberInStock, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Product.NumberInStock)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Product.Photo)
+            @Html.TextBoxFor(m => m.Product.Photo, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Product.Photo)
+        </div>
+        @Html.HiddenFor(m => m.Product.Id)
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <input type="submit" class="btn btn-default" value="Zapisz" />
+        </div>
+    }
+</div>
+

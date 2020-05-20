@@ -1,0 +1,51 @@
+﻿@model ShopMVC.Models.Order
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Szczegóły zamówienia</h2>
+<div class="wraper">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Strona główna</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Zamówienie @Model.Id</li>
+        </ol>
+    </nav>
+    <div class="container order-details">
+        @if (Model.Id != 0)
+        {
+            <div class="id">@Model.Id</div>
+        }
+        <div class="items">
+            Produkty:
+            <ul>
+                @foreach (var item in Model.ItemsList)
+                {
+                    <li class="item">
+                        @item.Product.Name (@item.Product.Price.ToString("0.00") zł) * @item.Number
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="sum">
+            Łącznie: @Model.ItemsList.Sum(item => item.Product.Price * item.Number).ToString("0.00") zł
+        </div>
+        <div class="username">
+            @Model.User.Name
+        </div>
+        <div class="phone">
+            @Model.User.Phone
+        </div>
+        <div class="adress">
+            @Model.User.Address
+        </div>
+        <div class="city">
+            @Model.User.City
+        </div>
+        <div class="postal">
+            @Model.User.PostalCode
+        </div>
+    </div>
+</div>
+

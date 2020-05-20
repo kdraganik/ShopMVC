@@ -1,0 +1,39 @@
+﻿@model ShopMVC.ViewModels.ItemViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Szczegóły produktu</h2>
+<div class="wraper">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Strona główna</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Products")">Produkty</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Product.Name</li>
+        </ol>
+    </nav>
+    <div class="container product-details">
+        <img class="image" src="@Model.Product.Photo" alt="" />
+        <div class="info">
+            <h2 class="name">@Model.Product.Name</h2>
+            <h4 class="price">Cena: @Model.Product.Price.ToString("0.00") zł</h4>
+            <div class="description">@Model.Product.Description</div>
+            @using (Html.BeginForm("AddToCart", "Cart", new { id = Model.Product.Id }))
+            {
+                <div class="in-stock">Pozostało: @Model.Product.NumberInStock szt.</div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Number)
+                    @Html.TextBoxFor(m => m.Number, new { @class = "form-control" })
+                    @if (Model.ErrorMessage != null)
+                    {
+                        <div class="error">@Model.ErrorMessage</div>
+                    }
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default" value="Dodaj do koszyka" />
+                </div>
+            }
+        </div>
+    </div>
+</div>   
